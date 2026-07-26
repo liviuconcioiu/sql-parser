@@ -10,6 +10,8 @@ use Zumba\JsonSerializer\JsonSerializer;
 
 use function in_array;
 
+use const PHP_VERSION_ID;
+
 /**
  * Used for .out files generation
  */
@@ -64,7 +66,10 @@ class CustomJsonSerializer extends JsonSerializer
 
             try {
                 $propRef = $ref->getProperty($property);
-                $propRef->setAccessible(true);
+                if (PHP_VERSION_ID < 80100) {
+                    $propRef->setAccessible(true);
+                }
+
                 $data[$property] = $propRef->getValue($value);
             } catch (ReflectionException $e) {
                 $data[$property] = $value->$property;
