@@ -13,16 +13,24 @@ use ReflectionProperty;
 
 use function realpath;
 
+use const PHP_VERSION_ID;
+
 /** @covers \PhpMyAdmin\SqlParser\Translator */
 final class TranslatorTest extends TestCase
 {
     public static function tearDownAfterClass(): void
     {
         $loaderProperty = new ReflectionProperty(Translator::class, 'loader');
-        $loaderProperty->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $loaderProperty->setAccessible(true);
+        }
+
         $loaderProperty->setValue(null, null);
         $translatorProperty = new ReflectionProperty(Translator::class, 'translator');
-        $translatorProperty->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $translatorProperty->setAccessible(true);
+        }
+
         $translatorProperty->setValue(null, null);
         Translator::setLocale('en');
     }
@@ -46,10 +54,16 @@ final class TranslatorTest extends TestCase
     public function testLoad(?string $globalLang, string $locale, string $expectedLocale): void
     {
         $loaderProperty = new ReflectionProperty(Translator::class, 'loader');
-        $loaderProperty->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $loaderProperty->setAccessible(true);
+        }
+
         $loaderProperty->setValue(null, null);
         $translatorProperty = new ReflectionProperty(Translator::class, 'translator');
-        $translatorProperty->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $translatorProperty->setAccessible(true);
+        }
+
         $translatorProperty->setValue(null, null);
         $GLOBALS['lang'] = $globalLang;
         Translator::setLocale($locale);
@@ -62,16 +76,25 @@ final class TranslatorTest extends TestCase
         self::assertInstanceOf(Loader::class, $loader);
         $loaderClass = new ReflectionClass(Loader::class);
         $localeProperty = $loaderClass->getProperty('locale');
-        $localeProperty->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $localeProperty->setAccessible(true);
+        }
+
         self::assertSame($expectedLocale, $localeProperty->getValue($loader));
         // Compatibility with MoTranslator < 5
         $defaultDomainProperty = $loaderClass->hasProperty('default_domain')
             ? $loaderClass->getProperty('default_domain')
             : $loaderClass->getProperty('defaultDomain');
-        $defaultDomainProperty->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $defaultDomainProperty->setAccessible(true);
+        }
+
         self::assertSame('sqlparser', $defaultDomainProperty->getValue($loader));
         $pathsProperty = $loaderClass->getProperty('paths');
-        $pathsProperty->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $pathsProperty->setAccessible(true);
+        }
+
         self::assertSame(
             ['' => './', 'sqlparser' => realpath(__DIR__ . '/../../src/') . '/../locale/'],
             $pathsProperty->getValue($loader)
@@ -81,10 +104,16 @@ final class TranslatorTest extends TestCase
     public function testGettext(): void
     {
         $loaderProperty = new ReflectionProperty(Translator::class, 'loader');
-        $loaderProperty->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $loaderProperty->setAccessible(true);
+        }
+
         $loaderProperty->setValue(null, null);
         $translatorProperty = new ReflectionProperty(Translator::class, 'translator');
-        $translatorProperty->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $translatorProperty->setAccessible(true);
+        }
+
         $translatorProperty->setValue(null, null);
         Translator::setLocale('pt_BR');
         self::assertSame(
@@ -93,10 +122,16 @@ final class TranslatorTest extends TestCase
         );
 
         $loaderProperty = new ReflectionProperty(Translator::class, 'loader');
-        $loaderProperty->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $loaderProperty->setAccessible(true);
+        }
+
         $loaderProperty->setValue(null, null);
         $translatorProperty = new ReflectionProperty(Translator::class, 'translator');
-        $translatorProperty->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $translatorProperty->setAccessible(true);
+        }
+
         $translatorProperty->setValue(null, null);
         Translator::setLocale('en');
         self::assertSame(

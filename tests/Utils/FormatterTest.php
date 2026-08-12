@@ -8,6 +8,8 @@ use PhpMyAdmin\SqlParser\Tests\TestCase;
 use PhpMyAdmin\SqlParser\Utils\Formatter;
 use ReflectionMethod;
 
+use const PHP_VERSION_ID;
+
 class FormatterTest extends TestCase
 {
     /**
@@ -54,7 +56,10 @@ class FormatterTest extends TestCase
         ];
 
         $reflectionMethod = new ReflectionMethod($formatter, 'getMergedOptions');
-        $reflectionMethod->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $reflectionMethod->setAccessible(true);
+        }
+
         $this->assertEquals($expectedOptions, $reflectionMethod->invoke($formatter, $overridingOptions));
     }
 
