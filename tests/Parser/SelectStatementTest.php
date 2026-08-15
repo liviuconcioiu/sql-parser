@@ -6,6 +6,7 @@ namespace PhpMyAdmin\SqlParser\Tests\Parser;
 
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Tests\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class SelectStatementTest extends TestCase
 {
@@ -20,6 +21,7 @@ class SelectStatementTest extends TestCase
     /**
      * @dataProvider selectProvider
      */
+    #[DataProvider('selectProvider')]
     public function testSelect(string $test): void
     {
         $this->runParserTest($test);

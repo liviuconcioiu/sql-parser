@@ -7,6 +7,7 @@ namespace PhpMyAdmin\SqlParser\Tests\Components;
 use PhpMyAdmin\SqlParser\Components\LockExpression;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Tests\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class LockExpressionTest extends TestCase
 {
@@ -30,6 +31,7 @@ class LockExpressionTest extends TestCase
     /**
      * @dataProvider parseErrProvider
      */
+    #[DataProvider('parseErrProvider')]
     public function testParseErr(string $expr, string $error): void
     {
         $parser = new Parser();

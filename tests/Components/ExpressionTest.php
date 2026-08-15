@@ -7,6 +7,7 @@ namespace PhpMyAdmin\SqlParser\Tests\Components;
 use PhpMyAdmin\SqlParser\Components\Expression;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Tests\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class ExpressionTest extends TestCase
 {
@@ -42,6 +43,7 @@ class ExpressionTest extends TestCase
     /**
      * @dataProvider parseErrProvider
      */
+    #[DataProvider('parseErrProvider')]
     public function testParseErr(string $expr, string $error): void
     {
         $parser = new Parser();
@@ -145,6 +147,7 @@ class ExpressionTest extends TestCase
     /**
      * @dataProvider mysqlCommandsProvider
      */
+    #[DataProvider('mysqlCommandsProvider')]
     public function testMysqlCommands(string $expr, string $expected): void
     {
         $parser = new Parser($expr, true);

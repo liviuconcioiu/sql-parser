@@ -6,6 +6,7 @@ namespace PhpMyAdmin\SqlParser\Tests\Parser;
 
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Tests\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class LoadStatementTest extends TestCase
 {
@@ -20,6 +21,7 @@ class LoadStatementTest extends TestCase
     /**
      * @dataProvider loadProvider
      */
+    #[DataProvider('loadProvider')]
     public function testLoad(string $test): void
     {
         $this->runParserTest($test);

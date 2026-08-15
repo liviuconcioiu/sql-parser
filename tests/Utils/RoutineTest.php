@@ -7,6 +7,7 @@ namespace PhpMyAdmin\SqlParser\Tests\Utils;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Tests\TestCase;
 use PhpMyAdmin\SqlParser\Utils\Routine;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class RoutineTest extends TestCase
 {
@@ -15,6 +16,7 @@ class RoutineTest extends TestCase
      *
      * @dataProvider getReturnTypeProvider
      */
+    #[DataProvider('getReturnTypeProvider')]
     public function testGetReturnType(string $def, array $expected): void
     {
         $this->assertEquals($expected, Routine::getReturnType($def));
@@ -115,6 +117,7 @@ class RoutineTest extends TestCase
      *
      * @dataProvider getParameterProvider
      */
+    #[DataProvider('getParameterProvider')]
     public function testGetParameter(string $def, array $expected): void
     {
         $this->assertEquals($expected, Routine::getParameter($def));
@@ -224,6 +227,7 @@ class RoutineTest extends TestCase
      *
      * @dataProvider getParametersProvider
      */
+    #[DataProvider('getParametersProvider')]
     public function testGetParameters(string $query, array $expected): void
     {
         $parser = new Parser($query);

@@ -6,6 +6,7 @@ namespace PhpMyAdmin\SqlParser\Tests\Components;
 
 use PhpMyAdmin\SqlParser\Components\Limit;
 use PhpMyAdmin\SqlParser\Tests\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class LimitTest extends TestCase
 {
@@ -24,6 +25,7 @@ class LimitTest extends TestCase
     /**
      * @dataProvider parseProvider
      */
+    #[DataProvider('parseProvider')]
     public function testParse(string $test): void
     {
         $this->runParserTest($test);

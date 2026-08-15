@@ -7,6 +7,8 @@ namespace PhpMyAdmin\SqlParser\Tests\Misc;
 use PhpMyAdmin\MoTranslator\Loader;
 use PhpMyAdmin\MoTranslator\Translator as MoTranslator;
 use PhpMyAdmin\SqlParser\Translator;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionProperty;
@@ -16,6 +18,7 @@ use function realpath;
 use const PHP_VERSION_ID;
 
 /** @covers \PhpMyAdmin\SqlParser\Translator */
+#[CoversClass(Translator::class)]
 final class TranslatorTest extends TestCase
 {
     public static function tearDownAfterClass(): void
@@ -51,6 +54,10 @@ final class TranslatorTest extends TestCase
      *           ["en", "", "en"]
      *           ["fr", "", "fr"]
      */
+    #[TestWith([null, 'en', 'en'])]
+    #[TestWith([null, 'fr', 'fr'])]
+    #[TestWith(['en', '', 'en'])]
+    #[TestWith(['fr', '', 'fr'])]
     public function testLoad(?string $globalLang, string $locale, string $expectedLocale): void
     {
         $loaderProperty = new ReflectionProperty(Translator::class, 'loader');

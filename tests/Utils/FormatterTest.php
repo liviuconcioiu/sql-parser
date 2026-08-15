@@ -6,6 +6,7 @@ namespace PhpMyAdmin\SqlParser\Tests\Utils;
 
 use PhpMyAdmin\SqlParser\Tests\TestCase;
 use PhpMyAdmin\SqlParser\Utils\Formatter;
+use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionMethod;
 
 use const PHP_VERSION_ID;
@@ -22,6 +23,7 @@ class FormatterTest extends TestCase
      *
      * @dataProvider mergeFormatsProvider
      */
+    #[DataProvider('mergeFormatsProvider')]
     public function testMergeFormats(array $default, array $overriding, array $expected): void
     {
         $formatter = $this->createPartialMock(Formatter::class, ['getDefaultOptions', 'getDefaultFormats']);
@@ -253,6 +255,7 @@ class FormatterTest extends TestCase
      *
      * @dataProvider formatQueriesProviders
      */
+    #[DataProvider('formatQueriesProviders')]
     public function testFormat(string $query, string $text, string $cli, string $html, array $options = []): void
     {
         // Test TEXT format

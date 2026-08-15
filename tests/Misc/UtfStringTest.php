@@ -6,6 +6,7 @@ namespace PhpMyAdmin\SqlParser\Tests\Misc;
 
 use PhpMyAdmin\SqlParser\Tests\TestCase;
 use PhpMyAdmin\SqlParser\UtfString;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Throwable;
 
 use function chr;
@@ -86,6 +87,7 @@ class UtfStringTest extends TestCase
      *
      * @dataProvider utf8StringsProvider
      */
+    #[DataProvider('utf8StringsProvider')]
     public function testAccess(string $text, ?string $pos10, ?string $pos20): void
     {
         $str = new UtfString($text);

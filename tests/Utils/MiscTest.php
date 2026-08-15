@@ -7,6 +7,7 @@ namespace PhpMyAdmin\SqlParser\Tests\Utils;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Tests\TestCase;
 use PhpMyAdmin\SqlParser\Utils\Misc;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class MiscTest extends TestCase
 {
@@ -19,6 +20,7 @@ class MiscTest extends TestCase
      *
      * @dataProvider getAliasesProvider
      */
+    #[DataProvider('getAliasesProvider')]
     public function testGetAliases(string $query, ?string $db, array $expected): void
     {
         $parser = new Parser($query);
