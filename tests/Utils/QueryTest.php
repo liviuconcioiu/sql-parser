@@ -8,6 +8,7 @@ use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Statement;
 use PhpMyAdmin\SqlParser\Tests\TestCase;
 use PhpMyAdmin\SqlParser\Utils\Query;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 use function array_merge;
 
@@ -22,6 +23,7 @@ class QueryTest extends TestCase
      *
      * @dataProvider getFlagsProvider
      */
+    #[DataProvider('getFlagsProvider')]
     public function testGetFlags(string $query, array $expected): void
     {
         $parser = new Parser($query);
@@ -454,6 +456,7 @@ class QueryTest extends TestCase
      *
      * @dataProvider getTablesProvider
      */
+    #[DataProvider('getTablesProvider')]
     public function testGetTables(string $query, array $expected): void
     {
         $parser = new Parser($query);

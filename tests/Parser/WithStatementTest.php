@@ -8,6 +8,7 @@ use PhpMyAdmin\SqlParser\Components\WithKeyword;
 use PhpMyAdmin\SqlParser\Lexer;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Tests\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use stdClass;
 
 class WithStatementTest extends TestCase
@@ -15,6 +16,7 @@ class WithStatementTest extends TestCase
     /**
      * @dataProvider parseWith
      */
+    #[DataProvider('parseWith')]
     public function testParse(string $test): void
     {
         $this->runParserTest($test);

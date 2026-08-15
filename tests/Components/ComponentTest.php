@@ -8,6 +8,8 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Tests\TestCase;
 use PhpMyAdmin\SqlParser\TokensList;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 use Throwable;
 
 class ComponentTest extends TestCase
@@ -16,6 +18,8 @@ class ComponentTest extends TestCase
      * @runInSeparateProcess
      * @preserveGlobalState disabled
      */
+    #[RunInSeparateProcess]
+    #[PreserveGlobalState(false)]
     public function testParse(): void
     {
         $this->expectExceptionMessage('Not implemented yet.');
